@@ -36,7 +36,7 @@ atom .
 ##(index.js)
 
 ###7. Require your dependencies
-```
+```javascript
 var express = require('express');
 var bodyParser = require('body-parser');
 var session = require('express-session');
@@ -44,17 +44,17 @@ var cors = require('cors');
 ```
 
 ###8. Initialize your express app
-```
+```javascript
 var app = express();
 ```
 
 ###9. Use body-parser's json method to parse http body as json and assign result to req.body. The app.use() method just applies a function to every request made (before passing it on to the next function or eventually sending a response)
-```
+```javascript
 app.use(bodyParser.json());
 ```
 
 ###10. To avoid security issues, configure CORS to whitelist only a specific origin (replace the port number with your selected port number)
-```
+```javascript
 //Options for whitelisting cors
 var corsOptions = {
    origin: 'http://localhost:' + port
