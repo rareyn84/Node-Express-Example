@@ -54,12 +54,14 @@ var cors = require('cors');
 var app = express();
 ```
 
-####9. Use body-parser's json method to parse http body as json and assign result to req.body. The app.use() method just applies a function to every request made (before passing it on to the next function or eventually sending a response)
+####9. Use body-parser
+Use body-parser's json method to parse http body as json and assign result to req.body. The app.use() method just applies a function to every request made (before passing it on to the next function or eventually sending a response)
 ```javascript
 app.use(bodyParser.json());
 ```
 
-####10. CORS is a node package necessary when creating cross-origin apps (CORS replaces the need to supply headers added to the enpoint). To avoid security issues, configure CORS to whitelist only a specific origin (replace the port number with your selected port number)
+####10. CORS
+CORS is a node package necessary when creating cross-origin apps (CORS replaces the need to supply headers added to the enpoint). To avoid security issues, configure CORS to whitelist only a specific origin (replace the port number with your selected port number)
 ```javascript
 //Options for whitelisting cors
 var corsOptions = {
@@ -73,14 +75,26 @@ app.use(cors(corsOptions));
 app.use(cors());
 ```
 
+####11. Express-Session
+If you desire to use cookies and session Id's, call session like this.
+```
+app.use(session({
+  secret: 5,
+  saveUninitialized: true,
+  resave: true
+}));
+```
+
 ##(Terminal)
 
-####11. Create a controllers directory (inside which the files that will contain functions to link our endpoints with our models or services are placed)
+####12. Create a controllers directory
+(inside which the files that will contain functions to link our endpoints with our models or services are placed)
 ```
 mkdir controllers
 ```
 
-####12. Inside your contollers dir, create one or more controllers, each for a specific resource (i.e. users, movies, etc.). For these instructions we will use "users" as our resource example
+####13. Create Controllers
+Inside your contollers dir, create one or more controllers, each for a specific resource (i.e. users, movies, etc.). For these instructions we will use "users" as our resource example
 ```
 cd controllers
 touch users_controller.js
@@ -88,12 +102,14 @@ touch users_controller.js
 
 ##(index.js)
 
-####13. Pull in the code that we're going to be adding to the users_controller
+####14. Require Controllers
+Pull in the code that we're going to be adding to the users_controller
 ```javascript
 var mainCtrl = require('./controllers/users_controller');
 ```
 
-####14. Tell express to listen to a port -- also tell express what port to send response on. Common ports used for local dev servers are 3000 and 8080
+####15. Tell express to listen to a port
+Tell express to listen to a port -- also tell express what port to send response on. Common ports used for local dev servers are 3000 and 8080
 ```javascript
 var port = 3000;
 app.listen(port, function(){
@@ -101,7 +117,8 @@ app.listen(port, function(){
 });
 ```
 
-####15. Build your endpoints. We have 5 here to get all users, get a specific user, add a user, edit a user, and delete a user. pass a reference to the methods that we will be exporting as part of our resource controller (users_controller in our example)
+####16. Build your endpoints.
+We have 5 here to get all users, get a specific user, add a user, edit a user, and delete a user. pass a reference to the methods that we will be exporting as part of our resource controller (users_controller in our example)
 ```javascript
 app.get('/users', usersCtrl.index);
 app.get('/users/:id', usersCtrl.show);
@@ -112,7 +129,8 @@ app.delete('/users', usersCtrl.destroy);
 
 ##(users_controller.js)
 
-####16. Create an object of methods that is exported from the cotroller file. This object will contain methods called by our /users(/:id) endpoints in index.js
+####17. Create controller methods
+Create an object of methods that is exported from the cotroller file. This object will contain methods called by our /users(/:id) endpoints in index.js
 ```javascript
 module.exports = {
   index: function(req, res, next) { //A function for a GET request that returns the whole array of users
@@ -140,20 +158,20 @@ module.exports = {
 
 ##(Terminal)
 
-####17. Add models folder
+####18. Add models folder
 ```
 cd ..
 mkdir models
 ```
 
-####18. Add User.js file
+####19. Add User.js file
 ```
 touch User.js
 ```
 
 ## (User.js)
 
-####19. Export an array of users
+####20. Export an array of users
 ```javascript
 module.exports = [{
   name: 'string',
@@ -171,20 +189,22 @@ module.exports = [{
 
 ##(users_controller.js)
 
-####20. Require (at the top of this file) the array of users in User.js
+####21. Require users
+Require (at the top of this file) the array of users in User.js
 ```javascript
 var users = require('../models/User');
 ```
 
 ##(Terminal)
 
-####21. Run your new server using node
+####22. Run your new server using node
 ```javascript
 nodemon
 ```
 
 ##(Postman)
 
-####22. Test your endpoints using Chrome's Postman extension (see Postman documentation or ask for help with this if you need it)
+####23. Test your endpoints
+Test your endpoints using Chrome's Postman extension (see Postman documentation or ask for help with this if you need it)
 
 ####At this point your backend has its basic setup and is ready to manipulate user data
