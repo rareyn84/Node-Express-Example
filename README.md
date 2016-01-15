@@ -64,6 +64,7 @@ var corsOptions = {
 app.use(cors(corsOptions));
 
 //If you dont use cors options variable
+app.use(cors());
 ```
 
 ##(Terminal)
